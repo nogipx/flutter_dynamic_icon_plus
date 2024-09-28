@@ -101,7 +101,7 @@ class FlutterDynamicIconPlusPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
       MethodNames.getAlternateIconName -> {
         if(activity != null){
           val enabledComponent = ComponentUtil.getCurrentEnabledAlias(activity!!)
-          result.success(enabledComponent?.name)
+          result.success(enabledComponent?.name?.substringAfterLast('.'))
         }
         else {
           result.error("500", "Activity not found", "Activity didn't attached")
