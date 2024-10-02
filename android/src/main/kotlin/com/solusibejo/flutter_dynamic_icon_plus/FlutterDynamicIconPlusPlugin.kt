@@ -40,6 +40,7 @@ class FlutterDynamicIconPlusPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
         if(activity != null){
           val sp = activity?.getSharedPreferences(pluginName, Context.MODE_PRIVATE)
           val iconName = call.argument<String?>(Arguments.iconName)
+          val updateInstantly = call.argument<Boolean?>(Arguments.updateInstantly) ?: false
           val brandsInString = call.argument<String?>(Arguments.brands)
           val manufacturesInString = call.argument<String?>(Arguments.manufactures)
           val modelsInString = call.argument<String?>(Arguments.models)
@@ -54,15 +55,13 @@ class FlutterDynamicIconPlusPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
           Log.d("setAlternateIconName", "Saved app icon status: $saved")
 
           if(saved == true){
-            if(!containsOnBlacklist(brandsInString, manufacturesInString, modelsInString)){
+            if(!containsOnBlacklist(brandsInString, manufacturesInString, modelsInString) && updateInstantly){
               if(activity != null){
-                if(iconName != null){
-                  ComponentUtil.changeAppIcon(
-                    activity!!,
-                    activity!!.packageManager,
-                    activity!!.packageName
-                  )
-                }
+                ComponentUtil.changeAppIcon(
+                  activity!!,
+                  activity!!.packageManager,
+                  activity!!.packageName
+                )
 
                 ComponentUtil.removeCurrentAppIcon(activity!!)
               }

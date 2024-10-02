@@ -9,16 +9,18 @@ class FlutterDynamicIconPlus {
   static Future<String?> get alternateIconName async =>
       await FlutterDynamicIconPlusPlatform.instance.alternateIconName;
 
-  /// `blacklistBrands`, `blacklistManufactures`, `blacklistModels` just only
+  /// `updateInstantly`, `blacklistBrands`, `blacklistManufactures`, `blacklistModels` just only
   /// work for Android platform only
   static Future<void> setAlternateIconName({
     String? iconName,
+    bool? updateInstantly = false,
     List<String> blacklistBrands = const [],
     List<String> blacklistManufactures = const [],
     List<String> blacklistModels = const [],
   }) async {
     await FlutterDynamicIconPlusPlatform.instance.setAlternateIconName(
       iconName: iconName,
+      updateInstantly: updateInstantly,
       blacklistBrands: blacklistBrands,
       blacklistManufactures: blacklistManufactures,
       blacklistModels: blacklistModels,
