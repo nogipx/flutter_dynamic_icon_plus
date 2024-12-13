@@ -62,7 +62,7 @@ class FlutterDynamicIconPlusPlugin: FlutterPlugin, MethodCallHandler, ActivityAw
                   activity!!.packageManager,
                   activity!!.packageName
                 )
-
+              } else {
                 ComponentUtil.removeCurrentAppIcon(activity!!)
               }
             }
